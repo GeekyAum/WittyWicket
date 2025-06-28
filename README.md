@@ -1,5 +1,3 @@
-Below is a cleaned‑up, reorganized, and more technically detailed README for your AI Sports Commentator project.
-
 ---
 
 ## AI Sports Commentator
