@@ -1,6 +1,6 @@
 
 ### Workflow Overview
-![2]()
+![2](architecture.svg)
 
 ---
 
