@@ -33,28 +33,61 @@ This diagram shows the end‑to‑end flow of our AI‑driven live sports commen
 
 ```mermaid
 flowchart TD
-    %% Define nodes
-    A[Live Sports Website(s)]
-    B[Match Selector UI]
-    C[Event Scraper Module<br/>(ball‑by‑ball / event)]
-    D[Pathway Vector Store<br/>(ingest & index events)]
-    subgraph Agentic LLM Pipeline
-      direction TB
-      E1[1. Stats Analyzer]
-      E2[2. Commentary Generator]
+    %% ===========================================
+    %% LIVE SPORTS COMMENTARY SYSTEM ARCHITECTURE
+    %% ===========================================
+    
+    %% Top Row - Input Layer
+    A[🌐 Live Sports Website<br/>Data Provider]
+    B[🎯 Match Selector UI<br/>User Interface]
+    C[🔄 Event Scraper Module<br/>Ball-by-ball Data Extraction]
+    
+    %% Middle Row - Processing & AI
+    G[📺 Live Commentary Stream<br/>Real-time Broadcasting]
+    subgraph LLM [" 🤖 Agentic LLM Pipeline "]
+        direction TB
+        E[📊 Stats Analyzer<br/>Performance Metrics]
+        F[✍️ Commentary Generator<br/>Natural Language Output]
     end
-    H[Live Commentary Stream]
-
-    %% Define flows
-    A -->|1. Scrape match list<br/>(IDs, teams)| B
-    B -->|2. User selects a match| C
-    C -->|3. Stream events| D
-    D -->|4. Query /<br/>retrieve context| E1
-    D -->|4. Query /<br/>retrieve context| E2
-    E1 -->|Pass stats context| E2
-    E2 -->|5. Compose & emit commentary| H
-
+    D[🗂️ Pathway Vector Store<br/>Event Indexing & Storage]
+    
+    %% ===========================================
+    %% BOX FLOW PATTERN
+    %% ===========================================
+    
+    %% Top Row: Left to Right
+    A -->|"🔍 Scrape Match Data"| B
+    B -->|"👤 User Selection"| C
+    
+    %% Right Side: Top to Bottom
+    C -->|"⚡ Stream Events"| D
+    
+    %% Bottom Row: Right to Left (through AI)
+    D -->|"🔎 Context Retrieval"| E
+    E -->|"📈 Analysis"| F
+    F -->|"🎙️ Commentary"| G
+    
+    %% ===========================================
+    %% COMPONENT STYLING
+    %% ===========================================
+    
+    class A source
+    class B interface
+    class C processor
+    class D storage
+    class LLM pipeline
+    class E,F component
+    class G output
+    
+    classDef source fill:#E3F2FD,stroke:#1976D2,stroke-width:3px,color:#000
+    classDef interface fill:#E8F5E9,stroke:#388E3C,stroke-width:3px,color:#000
+    classDef processor fill:#FFF3E0,stroke:#F57C00,stroke-width:3px,color:#000
+    classDef storage fill:#F3E5F5,stroke:#7B1FA2,stroke-width:3px,color:#000
+    classDef pipeline fill:#FFE0B2,stroke:#E65100,stroke-width:4px,color:#000
+    classDef component fill:#FFCC80,stroke:#D84315,stroke-width:2px,stroke-dasharray: 5 5,color:#000
+    classDef output fill:#FCE4EC,stroke:#C2185B,stroke-width:3px,color:#000
 ```
+
 ---
 
 ## ⚙️ Getting Started
