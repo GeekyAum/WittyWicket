@@ -112,10 +112,9 @@ An end‑to‑end, real‑time **AI commentary system** that transforms live mat
 
 ---
 
-## 📄 License & Contribution
+## 📄 License
 
 * **License**: MIT
-* **Contributions**: Welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
 ---
 
