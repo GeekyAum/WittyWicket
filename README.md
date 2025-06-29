@@ -29,45 +29,32 @@ An end‑to‑end, real‑time **AI commentary system** that transforms live mat
 
 ## 🏗️ Architecture Overview
 
-```text
-┌──────────────────────────┐
-│  Live Sports Website(s)  │
-└───────────┬──────────────┘
-            │ 1. Scrape match list (IDs, teams)
-            ▼
-┌──────────────────────────┐
-│   Match Selector UI      │
-└───────────┬──────────────┘
-            │ 2. User selects a match
-            ▼
-┌──────────────────────────┐
-│ Event Scraper Module     │
-│ (ball‑by‑ball / event)   │
-└───────────┬──────────────┘
-            │ 3. Stream events
-            ▼
-┌──────────────────────────┐
-│ Pathway Vector Store     │
-│ (ingest & index events)  │
-└───────────┬──────────────┘
-            │ 4. Query / retrieve context
-            ▼
-┌──────────────────────────┐
-│ Agentic LLM Pipeline     │
-│ ┌──────────────────────┐ │
-│ │ 1. Stats Analyzer    │ │
-│ └──────────────────────┘ │
-│ ┌──────────────────────┐ │
-│ │ 2. Commentary Gen.   │ │
-│ └──────────────────────┘ │
-└───────────┬──────────────┘
-            │ 5. Compose & emit commentary
-            ▼
-┌──────────────────────────┐
-│  Live Commentary Stream  │
-└──────────────────────────┘
-```
+This diagram shows the end‑to‑end flow of our AI‑driven live sports commentary system:
 
+```mermaid
+flowchart TD
+    %% Define nodes
+    A[Live Sports Website(s)]
+    B[Match Selector UI]
+    C[Event Scraper Module<br/>(ball‑by‑ball / event)]
+    D[Pathway Vector Store<br/>(ingest & index events)]
+    subgraph Agentic LLM Pipeline
+      direction TB
+      E1[1. Stats Analyzer]
+      E2[2. Commentary Generator]
+    end
+    H[Live Commentary Stream]
+
+    %% Define flows
+    A -->|1. Scrape match list<br/>(IDs, teams)| B
+    B -->|2. User selects a match| C
+    C -->|3. Stream events| D
+    D -->|4. Query /<br/>retrieve context| E1
+    D -->|4. Query /<br/>retrieve context| E2
+    E1 -->|Pass stats context| E2
+    E2 -->|5. Compose & emit commentary| H
+
+```
 ---
 
 ## ⚙️ Getting Started
